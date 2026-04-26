@@ -225,8 +225,8 @@ Transform:
   m_GameObject: {fileID: 82067047}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5705, y: -0.99, z: -1.42119}
-  m_LocalScale: {x: 83.71891, y: 1, z: 73.971}
+  m_LocalPosition: {x: -1.5705, y: -0.99, z: -1.4212}
+  m_LocalScale: {x: 256.4326, y: 1, z: 295.51413}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 441574971}
   - component: {fileID: 441574970}
   - component: {fileID: 441574972}
+  - component: {fileID: 441574973}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -525,14 +526,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441574965}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0676, y: 0.5, z: -0.78666}
+  m_LocalRotation: {x: -0, y: -0.28103283, z: -0, w: 0.9596982}
+  m_LocalPosition: {x: 115.7, y: 0.5, z: -142.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -32.644, z: 0}
 --- !u!136 &441574967
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -685,10 +686,24 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 5
   groundCheck: {fileID: 441574966}
-  groundDistance: 0.4
+  groundDistance: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &441574973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441574965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29513a70995bd94c9577eb6bb49958f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  mouseSensitivity: 50
+  cam: {fileID: 330585546}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
