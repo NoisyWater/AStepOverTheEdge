@@ -3,11 +3,14 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public float reloadTime = 1f;
-    public float fireRate = 0.15f;
+    public float fireRate = 1f;
     public int magSize = 20;
 
     public GameObject Spell;
     public Transform MagicSpawnPoint;
+
+    public float recoilDistence = 1f;
+    public float recoilSpeed = 15f;
 
     private int currentAmmo;
     private bool isReloading = false;
@@ -47,6 +50,8 @@ public class Gun : MonoBehaviour
 
         Instantiate(Spell, MagicSpawnPoint.position, MagicSpawnPoint.rotation);
 
+        StopCoroutine(nameof(Recoil));
+        StartCoroutine(nameof(Recoil));
     }
 
     IEnumerator Reload()
@@ -65,6 +70,8 @@ public class Gun : MonoBehaviour
             yield return null;
         }
 
+        t = 0f;
+
         while (t < halfReload)
         {
             t += Time.deltaTime;
@@ -82,5 +89,31 @@ public class Gun : MonoBehaviour
         if(isReloading) return;
         if (currentAmmo == magSize) return;
         StartCoroutine(Reload());
+    }
+
+    private IEnumerator Recoil()
+    {
+        Vector3 recoilTarget = initalPosition + new Vector3(recoilDistence, 0, 0);
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * recoilSpeed;
+
+            transform.localPosition = Vector3.Lerp(initalPosition, recoilTarget, t);
+            yield return null;
+        }
+
+        t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * recoilSpeed;
+
+            transform.localPosition = Vector3.Lerp(recoilTarget, initalPosition, t);
+            yield return null;
+        }
+
+        transform.localPosition = initalPosition;
     }
 }

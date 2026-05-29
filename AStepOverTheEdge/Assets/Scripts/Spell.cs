@@ -8,7 +8,7 @@ public class Spell : MonoBehaviour
     private Rigidbody rb;
     void Start()
     {
-        rb.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.linearVelocity = -transform.right * speed;
 
         Destroy(gameObject, lifeTime);
