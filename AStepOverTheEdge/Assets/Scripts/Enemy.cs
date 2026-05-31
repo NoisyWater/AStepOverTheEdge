@@ -6,6 +6,8 @@ using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
+    public RandomSoundPlayer soundPlayer;
+
     public int health = 100;
 
     public GameObject bulletPrefab;
@@ -63,6 +65,10 @@ public class Enemy : MonoBehaviour
 
             health -= 10;
             Debug.Log("Health now: " + health);
+            if (soundPlayer != null)
+            {
+                soundPlayer.PlayRandomEDamageSound();
+            }
 
             if (health <= 0)
             {
@@ -224,6 +230,11 @@ public class Enemy : MonoBehaviour
 
             Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletRotation);
             lastShotTime = Time.time;
+
+            if (soundPlayer != null)
+            {
+                soundPlayer.PlayRandomSound();
+            }
         }
 
     }

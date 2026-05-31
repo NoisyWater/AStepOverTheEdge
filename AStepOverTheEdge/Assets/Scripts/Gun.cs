@@ -28,6 +28,8 @@ public class Gun : MonoBehaviour
         initalRotation = transform.localRotation;
 
         initalPosition = transform.localPosition;
+
+        UIManager.Instance.ammoText.text = currentAmmo.ToString();
     }
 
 
@@ -47,8 +49,11 @@ public class Gun : MonoBehaviour
 
         nextTimeToFire = Time.time + fireRate;
         currentAmmo--;
+        UIManager.Instance.ammoText.text = currentAmmo.ToString();
 
-        Instantiate(Spell, MagicSpawnPoint.position, MagicSpawnPoint.rotation);
+        Quaternion adjustedRotation = MagicSpawnPoint.rotation * Quaternion.Euler(0.5f, -4f,0f);
+
+        Instantiate(Spell, MagicSpawnPoint.position, adjustedRotation);
 
         StopCoroutine(nameof(Recoil));
         StartCoroutine(nameof(Recoil));
@@ -81,6 +86,7 @@ public class Gun : MonoBehaviour
         }
 
         currentAmmo = magSize;
+        UIManager.Instance.ammoText.text = currentAmmo.ToString();
         isReloading = false;
     }
 

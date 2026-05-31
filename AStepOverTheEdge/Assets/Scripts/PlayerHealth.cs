@@ -3,8 +3,9 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
 	public float health = 100;
+    public RandomSoundPlayer soundPlayer;
 
-	private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
 	{
 		bool isDamage = collision.gameObject.CompareTag("Damage");
 
@@ -12,8 +13,12 @@ public class PlayerHealth : MonoBehaviour
 		{
 			DecreaseHealth(10);
 
-			
-		}
+            if (soundPlayer != null)
+            {
+                soundPlayer.PlayRandomDamageSound();
+            }
+
+        }
 	}
 
 	private void DecreaseHealth(int decreaseAmount)
@@ -31,5 +36,8 @@ public class PlayerHealth : MonoBehaviour
 	private void Die()
 	{
 		Time.timeScale = 0f;
+		UIManager.Instance.EnableDeathUI();
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 }

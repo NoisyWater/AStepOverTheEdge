@@ -5,9 +5,15 @@ public class PlayerShoot : MonoBehaviour
     public Gun gun;
     private bool isHoldingShoot = false;
 
+    public RandomSoundPlayer soundPlayer;
+
     void OnShoot()
     {
         isHoldingShoot = true;
+        if (soundPlayer != null)
+        {
+            soundPlayer.PlayRandomSound();
+        }
     }
 
     void OnShootRelease()
