@@ -7,9 +7,16 @@ using System.Linq;
 public class Enemy : MonoBehaviour
 {
     public int health = 100;
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
+    public float bloom;
+    public float fireRate;
+    private float lastShotTime = 0f;
+
     private Rigidbody rb;
 
-    private NavMeshAgent agent;
+   
 
     //AI settings
     public int currentPointIndex = 0;
@@ -25,7 +32,8 @@ public class Enemy : MonoBehaviour
     private Transform playerTransform;
     private bool canSeePlayer;
     private Vector3 lastKnownPlayerPosition;
-
+    
+    private NavMeshAgent agent;
     public enum State { Idle, Patrolling, Chasing, Attacking }
     public State state = State.Idle;
 
@@ -147,6 +155,8 @@ public class Enemy : MonoBehaviour
         idleTimeCounter = idleTime; 
         agent.ResetPath();
 
+        Shoot();
+
         if (Vector3.Distance(transform.position, playerTransform.position) > attackDistance || !canSeePlayer)
         {
             if (health < minChasingHealth)
@@ -194,5 +204,27 @@ public class Enemy : MonoBehaviour
         {
             lastKnownPlayerPosition = playerTransform.position;
         }
+    }
+
+    private void Shoot()
+    {
+        if(Time.time > lastShotTime + fireRate)
+        {
+            Vector3 directionToPlayer = playerTransform.position - transform.position;
+            directionToPlayer.Normalize();
+
+            Quaternion bulletRotation = Quaternion.LookRotation(directionToPlayer);
+
+            float maxInaccuracy = 10f;
+            float currentInaccuracy = bloom * maxInaccuracy;
+            float randomJaw = Random.Range(-currentInaccuracy, currentInaccuracy);
+            float randomPitch = Random.Range(-currentInaccuracy, currentInaccuracy);
+
+            bulletRotation *= Quaternion.Euler(randomPitch, randomJaw + 90, 0f);
+
+            Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletRotation);
+            lastShotTime = Time.time;
+        }
+
     }
 }
