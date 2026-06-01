@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-	public float health = 100;
+    public float maxHealth = 100;
+    public float health = 100;
     public RandomSoundPlayer soundPlayer;
+
+
+    private void Start()
+    {
+        UIManager.Instance.heartUI.UpdateHearts(health, maxHealth);
+    }
 
     private void OnCollisionEnter(Collision collision)
 	{
@@ -21,19 +28,22 @@ public class PlayerHealth : MonoBehaviour
         }
 	}
 
-	private void DecreaseHealth(int decreaseAmount)
-	{
-		health -= decreaseAmount;
-		PlayerLook.Instance.AddShake(0.1f, 0.1f);
-		UIManager.Instance.InstantiateHitUI();
+    private void DecreaseHealth(int decreaseAmount)
+    {
+        health -= decreaseAmount;
 
-		if(health <= 0)
-		{
-			Die();
-		}
-	}
+        UIManager.Instance.heartUI.UpdateHearts(health, maxHealth);
 
-	private void Die()
+        PlayerLook.Instance.AddShake(0.1f, 0.1f);
+        UIManager.Instance.InstantiateHitUI();
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
 	{
 		Time.timeScale = 0f;
 		UIManager.Instance.EnableDeathUI();

@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI ammoText;
 
+    public HeartUI heartUI;
+
     private void Awake()
     {
         Time.timeScale = 1.0f;
