@@ -18,7 +18,9 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody rb;
 
-   
+    public GameObject coin;
+    public Transform CoinSpawnPoint;
+
 
     //AI settings
     public int currentPointIndex = 0;
@@ -80,6 +82,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        Instantiate(coin, CoinSpawnPoint.position);
     }
 
     private void Update()

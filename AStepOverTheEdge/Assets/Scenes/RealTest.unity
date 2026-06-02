@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3960f0ecdbf18fb4bb042d60fd4f43a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  value: 1
+  value: 10
 --- !u!212 &94472557
 SpriteRenderer:
   serializedVersion: 2
