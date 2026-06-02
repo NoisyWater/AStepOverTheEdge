@@ -43,6 +43,18 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        health += amount;
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        UIManager.Instance.heartUI.UpdateHearts(health, maxHealth);
+    }
+
     private void Die()
 	{
 		Time.timeScale = 0f;

@@ -12,7 +12,7 @@ public class ShopUI : MonoBehaviour
     {
         if (CurrencyManager.Instance.SpendCoins(healthPotionPrice))
         {
-            playerHealth.health = Mathf.Min(playerHealth.maxHealth, playerHealth.health + 50);
+            playerHealth.Heal(50);
             Debug.Log("Bought health potion!");
         }
         else
