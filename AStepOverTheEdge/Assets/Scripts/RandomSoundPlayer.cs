@@ -48,6 +48,7 @@ public class RandomSoundPlayer : MonoBehaviour
         audioSource.PlayOneShot(damageSoundEffects[randomIndex]);
     }
 
+    //enemy damage noise
     public void PlayRandomEDamageSound()
     {
         if (eDamageSoundEffects.Length == 0) return;
