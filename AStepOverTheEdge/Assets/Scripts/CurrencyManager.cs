@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CurrencyManager : MonoBehaviour
 {
@@ -15,15 +16,32 @@ public class CurrencyManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
         else
         {
             Destroy(gameObject);
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-find UI after scene loads
+        GameObject uiObj = GameObject.Find("CoinText");
+
+        if (uiObj != null)
+        {
+            coinText = uiObj.GetComponent<TextMeshProUGUI>();
+        }
+
         UpdateUI();
     }
 
@@ -47,6 +65,9 @@ public class CurrencyManager : MonoBehaviour
 
     void UpdateUI()
     {
-        coinText.text = "Coins: " + coins;
+        if (coinText != null)
+        {
+            coinText.text = "Coins: " + coins;
+        }
     }
 }
