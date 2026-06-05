@@ -43,8 +43,11 @@ public class  PlayerLook : MonoBehaviour
 	}
 
 	void HandleMouseLook()
-	{ 
-		float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime; 
+	{
+        if (Time.timeScale == 0f)
+            return;
+
+        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime; 
 		float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
 
 		xRotation -= mouseY;

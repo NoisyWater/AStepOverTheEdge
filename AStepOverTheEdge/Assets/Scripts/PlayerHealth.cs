@@ -55,6 +55,11 @@ public class PlayerHealth : MonoBehaviour
         UIManager.Instance.heartUI.UpdateHearts(health, maxHealth);
     }
 
+    public void KillPlayer()
+    {
+        Die();
+    }
+
     private void Die()
 	{
 		Time.timeScale = 0f;
