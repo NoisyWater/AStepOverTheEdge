@@ -923,7 +923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 299, y: 137}
+  m_AnchoredPosition: {x: 294.1, y: 194.42}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &298996380
@@ -1296,6 +1296,9 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 1579016875}
   bloom: 0.75
   fireRate: 2.5
+  coinPrefab: {fileID: 5189861013371296184, guid: 570fe8641b29bdd4b929c81b4b178374, type: 3}
+  minCoins: 1
+  maxCoins: 3
   currentPointIndex: 0
   currentTarget: {x: 0, y: 0, z: 0}
   positionThreshold: 2
@@ -1728,7 +1731,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   gun: {fileID: 5287686747125602289}
-  soundPlayer: {fileID: 1555528353}
 --- !u!114 &441574975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4485,6 +4487,7 @@ MonoBehaviour:
   magSize: 20
   Spell: {fileID: 1752121737435439367, guid: e9f3bcce16751df44a51e6a2f58ddd3b, type: 3}
   MagicSpawnPoint: {fileID: 1798328076}
+  soundPlayer: {fileID: 1555528353}
   recoilDistence: 1
   recoilSpeed: 15
 --- !u!1001 &9203697637704221090

@@ -9,6 +9,8 @@ public class Gun : MonoBehaviour
     public GameObject Spell;
     public Transform MagicSpawnPoint;
 
+    public RandomSoundPlayer soundPlayer;
+
     public float recoilDistence = 1f;
     public float recoilSpeed = 15f;
 
@@ -51,7 +53,12 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         UIManager.Instance.ammoText.text = currentAmmo.ToString();
 
-        Quaternion adjustedRotation = MagicSpawnPoint.rotation * Quaternion.Euler(0.5f, -4f,0f);
+        if (soundPlayer != null)
+        {
+            soundPlayer.PlayRandomSound();
+        }
+
+        Quaternion adjustedRotation = MagicSpawnPoint.rotation * Quaternion.Euler(0.5f, -4f, 0f);
 
         Instantiate(Spell, MagicSpawnPoint.position, adjustedRotation);
 

@@ -18,7 +18,9 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody rb;
 
-   
+    public GameObject coinPrefab;
+    public int minCoins = 1;
+    public int maxCoins = 3;
 
 
     //AI settings
@@ -80,6 +82,20 @@ public class Enemy : MonoBehaviour
     }
     void Die()
     {
+        int amount = Random.Range(minCoins, maxCoins + 1);
+
+        for (int i = 0; i < amount; i++)
+        {
+            Vector3 offset = Random.insideUnitSphere * 0.5f;
+            offset.y = 0;
+
+            Instantiate(
+                coinPrefab,
+                transform.position + offset,
+                Quaternion.identity
+            );
+        }
+
         Destroy(gameObject);
     }
 
